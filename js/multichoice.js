@@ -243,8 +243,8 @@ H5P.MultiChoice = function (options, contentId, contentData) {
         html: '<div class="h5p-alternative-container"><span class="h5p-alternative-inner">' + answer.text + '</span></div>',
         appendTo: $myDom
       });
-    }  
-    
+    }
+
     self.setContent($myDom, {
       'class': params.behaviour.singleAnswer ? 'h5p-radio' : 'h5p-check'
     });
@@ -605,6 +605,7 @@ H5P.MultiChoice = function (options, contentId, contentData) {
    * Check answer
    */
   var checkAnswer = function () {
+
     // Unbind removal of feedback dialogs on click
     $myDom.unbind('click', removeFeedbackDialog);
 
@@ -626,6 +627,8 @@ H5P.MultiChoice = function (options, contentId, contentData) {
     addQuestionToXAPI(xAPIEvent);
     addResponseToXAPI(xAPIEvent);
     self.trigger(xAPIEvent);
+
+    self.trigger('click', self);
   };
 
   /**
@@ -820,7 +823,7 @@ H5P.MultiChoice = function (options, contentId, contentData) {
       'tabindex': '-1'
     }).removeAttr('role')
       .removeAttr('aria-checked');
-    
+
     $('.h5p-answers').removeAttr('role');
   };
 
